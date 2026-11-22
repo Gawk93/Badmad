@@ -1,34 +1,344 @@
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("./assets/bebas-neue.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   font-family: system-ui, sans-serif;
-  background: #141821;
-  color: #f8f5ed;
+  --display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --ink: #191c19;
+  --black: #080908;
+  --red: #c0211f;
+  --ivory: #ebe8de;
+  --muted: #c5c1b6;
+  --line: #4e5048;
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+  background: var(--ink);
+  color: var(--ivory);
 }
+
+* { box-sizing: border-box; }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  margin: 0;
+}
+
+main { flex: 1; }
+
+a { color: inherit; }
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), 74rem);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 2;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform: translateY(-150%);
+  padding: 0.5rem 0.75rem;
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  background: var(--black);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner,
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-inner {
+  gap: 0.4rem 2rem;
+  min-height: 4.75rem;
+  padding-block: 0.75rem;
+}
+
+.wordmark {
+  font: 2rem / 1 var(--display);
+  letter-spacing: 0.045em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wordmark span { color: #ed534b; }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem clamp(0.9rem, 3vw, 2.4rem);
+}
+
+nav a {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+nav a[aria-current="page"],
+nav a:hover {
+  border-color: var(--red);
+  color: var(--ivory);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+h1 { font-size: clamp(3.3rem, 9vw, 8rem); }
+
+h2 { font-size: clamp(2.25rem, 4.5vw, 4.25rem); }
+
+h3 { font-size: clamp(1.7rem, 2.7vw, 2.4rem); }
+
+p { line-height: 1.65; }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero-image {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 34%;
+  background:
+    linear-gradient(90deg, var(--black), #08090825 60%),
+    linear-gradient(0deg, #0809089c, transparent 60%),
+    url("./assets/sul-set.webp") center 53% / cover no-repeat;
+}
+
+.hero-inner {
+  padding-block: clamp(2.25rem, 5vw, 4rem) clamp(2.75rem, 6vw, 5rem);
+}
+
+.festival-logo { width: clamp(8.5rem, 18vw, 14rem); }
+
+.location {
+  width: fit-content;
+  margin: 1.75rem 0 0.65rem;
+  padding-left: 0.7rem;
+  border-left: 3px solid var(--red);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+  text-wrap: balance;
+}
+
+.hero-summary {
+  max-width: 42ch;
+  margin: 1rem 0 0;
+  color: var(--ivory);
+  font-size: clamp(1rem, 2vw, 1.22rem);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3rem;
+  margin-top: 1.5rem;
+  padding: 0.65rem 1rem;
+  background: var(--red);
+  color: #fff;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.action:hover { background: #a41c19; }
+
+.action::after {
+  width: 0.42rem;
+  height: 0.42rem;
+  transform: rotate(45deg);
+  border: solid currentColor;
+  border-width: 2px 2px 0 0;
+  content: "";
+}
+
+.film-edge {
+  height: 1.3rem;
+  background:
+    repeating-linear-gradient(90deg, var(--red) 0 0.45rem, transparent 0.45rem 1.55rem) left top / 100% 100%,
+    linear-gradient(var(--red) 0 0.32rem, var(--ink) 0.32rem 0.98rem, var(--red) 0.98rem);
+}
+
+.manifesto {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.manifesto-inner {
   display: grid;
-  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 1.25rem 3rem;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.manifesto p {
+  max-width: 57ch;
   margin: 0;
-  place-items: center;
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
 }
 
-main {
-  box-sizing: border-box;
-  width: min(100%, 48rem);
-  padding: 2rem;
-  text-align: center;
+.manifesto p + p { margin-top: 0.75rem; }
+
+.page-intro {
+  padding-block: clamp(2.75rem, 7vw, 5.5rem);
 }
 
-h1 {
-  margin: 0;
-  color: #e5fb9e;
-  font-size: clamp(3rem, 12vw, 7rem);
-  letter-spacing: -0.06em;
-  line-height: 1;
+.page-intro p {
+  max-width: 60ch;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.12rem;
 }
 
-p {
-  margin: 1.25rem 0 0;
-  font-size: 1.125rem;
+.page-content {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.page-content > section + section {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+}
+
+.schedule { margin: 1.5rem 0 0; }
+
+.schedule > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 3fr;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.schedule > div:last-child { border-bottom: 1px solid var(--line); }
+
+.schedule dt {
+  font: 1.6rem / 1 var(--display);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.schedule dd { margin: 0; }
+
+.schedule dd span {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--muted);
+}
+
+.competition {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+}
+
+.competition article {
+  border-top: 3px solid var(--red);
+  padding-block: 0.8rem;
+}
+
+.competition p,
+.venue p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+.venue {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 2rem 4rem;
+}
+
+.venue address {
+  margin-top: 0.85rem;
+  font-style: normal;
   line-height: 1.6;
+}
+
+.venue h3 { margin-top: 2rem; }
+
+.venue-photo {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--black);
+}
+
+.footer-inner {
+  gap: 0.65rem 2rem;
+  padding-block: 1.4rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 42rem) {
+  .hero-image {
+    inset-inline-start: 0;
+    background:
+      linear-gradient(90deg, #080908 3%, #08090875 80%),
+      linear-gradient(0deg, #080908ad, transparent 60%),
+      url("./assets/sul-set.webp") center 53% / cover no-repeat;
+  }
+
+  .manifesto-inner,
+  .competition,
+  .venue { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 26rem) {
+  .schedule > div { grid-template-columns: 1fr; }
 }
